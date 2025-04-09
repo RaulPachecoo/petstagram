@@ -1,18 +1,35 @@
-<<<<<<< HEAD
-import './bootstrap';
-=======
-import Dropzone from 'dropzone';
-import '../css/app.css'; // Asegúrate de importar el archivo CSS
+import Dropzone from "dropzone"; // Importa Dropzone desde el archivo correcto
 
-Dropzone.autoDiscover = false; 
+Dropzone.autoDiscover = false; // Desactivar la autodetección de formularios Dropzone
 
-const dropzone = new Dropzone('#dropzone', {
+
+const dropzone = new Dropzone('#dropzone', { // Asegúrate de que el selector esté apuntando correctamente
     dictDefaultMessage: 'Sube aquí tu imagen',
     acceptedFiles: ".png, .jpg, .jpeg, .gif", 
     addRemoveLinks: true,
     dictRemoveFile: 'Borrar Archivo', 
     maxFiles: 1,
     uploadMultiple: false,
-})
+    init: function() {
+        if(document.querySelector('[name="imagen"]').value.trim()){
+            const imagenPublicada = {}
+            imagenPublicada.size = 1234; 
+            imagenPublicada.name = document.querySelector('[name="imagen"]').value; 
+            
+            this.options.addedfile.call(this, imagenPublicada); 
+            this.options.thumbnail.call(this, imagenPublicada, `/uploads/${imagenPublicada.name}`)
 
->>>>>>> 31b97d83b9227992673e7cd3d786bb108a6f023f
+            imagenPublicada.previewElement.classList.add('dz-success', 'dz-complete'); 
+        }
+            
+    }
+});
+
+dropzone.on("success", function(file, response) {
+    document.querySelector('[name="imagen"]').value = response.imagen;
+});
+
+dropzone.on('removedfile', function(){
+    document.querySelector('[name="imagen"]').value = ""; 
+}); 
+

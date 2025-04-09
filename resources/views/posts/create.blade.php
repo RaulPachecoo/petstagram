@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endpush
 
+@push('scripts')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endpush
+
 @section('contenido')
     <div class="md:flex md:items-center">
         <div class="px-10 md:w-1/2">
@@ -18,7 +22,7 @@
         </div>
 
         <div class="p-10 mt-10 bg-white rounded-lg shadow-xl md:w-1/2 md:mt-0">
-            <form action="{{ route('register') }}" method="POST" novalidate>
+            <form action="{{ route('posts.store') }}" method="POST" novalidate>
                 @csrf
                 <div class="mb-5">
                     <label for="titulo" class="block mb-2 font-bold text-gray-500 uppercase">Título</label>
@@ -37,6 +41,19 @@
                         <p class="p-2 my-2 text-sm text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <div class="mb-5">
+                    <!-- Este es el campo oculto que se actualizará con el nombre de la imagen -->
+                    <input 
+                        name="imagen"
+                        type="hidden"
+                        value="{{ old('imagen') }}"
+                    />
+                    @error('imagen')
+                        <p class="p-2 my-2 text-sm text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
+                    @enderror
+                </div>  
+
                 <input type="submit" value="Crear Publicación"
                     class="w-full p-3 font-bold text-white uppercase transition-colors rounded-lg cursor-pointer bg-sky-600 hover:bg-sky-700">
             </form>
