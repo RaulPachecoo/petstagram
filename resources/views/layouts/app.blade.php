@@ -5,17 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @stack('styles')
-    <title>DevStagram - @yield('titulo')</title>
+    <title>Petstagram - @yield('titulo')</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     @livewireStyles
 </head>
 
 <body class="bg-gray-100">
-    <header class="p-5 bg-white border-b shadow">
+    <header class="p-3 bg-white border-b shadow">
         <div class="container flex items-center justify-between mx-auto">
-            <a href="{{ route('home') }}" class="text-3xl font-black">
-                DevStagram
+            <a href="{{ route('home') }}" class="flex items-center gap-3 text-3xl font-black">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo de Petstagram" style="width: 55px; height: auto;"> 
+                Petstagram
             </a>
 
             @auth
@@ -57,7 +58,7 @@
     </main>
 
     <footer class="p-5 mt-10 font-bold text-center text-gray-500 uppercase">
-        DevStagram - Todos los derechos reservados
+        Petstagram - Todos los derechos reservados
         {{ now()->year }}
     </footer>
 

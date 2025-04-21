@@ -39,6 +39,6 @@ class RegisterController extends Controller
         Auth::attempt($request->only('email', 'password')); 
 
         // Redireccionar al usuario
-        return redirect()->route('posts.index'); 
+        return redirect()->route('posts.index', Auth::user()->username); 
     }
 }
