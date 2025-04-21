@@ -30,38 +30,11 @@
                         @endif
                     @endauth
                 </div>
-                <p class="mt-5 mb-3 text-sm font-bold text-gray-800">
-                    {{ $user->followers->count() }}
-                    <span class="font-normal">@choice('Seguidor|Seguidores', $user->followers->count())</span>
-                </p>
-                <p class="mb-3 text-sm font-bold text-gray-800">
-                    {{ $user->following->count() }}
-                    <span class="font-normal">Siguiendo</span>
-                </p>
-                <p class="mb-3 text-sm font-bold text-gray-800">
-                    {{ $user->posts->count() }}
-                    <span class="font-normal">Posts</span>
-                </p>
+                
                 @auth
-                    @if($user->id !== Auth::user()->id)
-                        @if(!$user->siguiendo(Auth::user()))
-                            <form action="{{ route('users.follow', $user) }}" method="POST">
-                                @csrf
-                                <input type="submit"
-                                    class="px-3 py-1 text-xs font-bold text-white uppercase bg-blue-600 rounded-lg cursor-pointer"
-                                    value="Seguir">
-                            </form>
-                        @else
-                            <form action="{{ route('users.unfollow', $user) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit"
-                                    class="px-3 py-1 text-xs font-bold text-white uppercase bg-red-600 rounded-lg cursor-pointer"
-                                    value="Dejar de Seguir">
-                            </form>
-                        @endif
-                    @endif
-
+                    
+                        @livewire('follow-button', ['user' => $user])
+                    
                 @endauth
             </div>
         </div>

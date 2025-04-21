@@ -8,6 +8,7 @@
     <title>DevStagram - @yield('titulo')</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    @livewireStyles
 </head>
 
 <body class="bg-gray-100">
@@ -30,7 +31,8 @@
                         </svg>
                         Crear
                     </a>
-                    <a class="text-sm font-bold text-gray-600" href="{{ route('posts.index', Auth::user()->username) }}">Hola: <span
+                    <a class="text-sm font-bold text-gray-600"
+                        href="{{ route('posts.index', Auth::user()->username) }}">Hola: <span
                             class="font-normal">{{ auth()->user()->username }}</span></a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -58,6 +60,8 @@
         DevStagram - Todos los derechos reservados
         {{ now()->year }}
     </footer>
+
+    @livewireScripts
 </body>
 
 </html>
