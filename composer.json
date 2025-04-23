@@ -10,6 +10,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "google/cloud-dlp": "^2.4",
+        "google/cloud-vision": "^2.0",
+        "guzzlehttp/guzzle": "^7.9",
         "intervention/image": "^2.7",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.10.1",

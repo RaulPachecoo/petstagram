@@ -1,0 +1,22 @@
+# 1. Cargar y limpiar el base64
+$base64 = Get-Content "C:\Users\Raúl\imagen_base64.txt" -Raw
+$base64 = $base64 -replace "`r|`n", ""
+
+# 2. Crear el cuerpo JSON manualmente
+$jsonBody = @"
+{
+  "model": "minicpm-v",
+  "prompt": "Describe esta imagen",
+  "images": ["$base64"],
+  "stream": false
+}
+"@
+
+# 3. Hacer la solicitud POST a Ollama
+$response = Invoke-RestMethod -Uri "http://localhost:11434/api/generate" `
+                              -Method POST `
+                              -Body $jsonBody `
+                              -ContentType "application/json"
+
+# 4. Mostrar la respuesta
+$response

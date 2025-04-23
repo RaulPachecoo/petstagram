@@ -7,7 +7,7 @@
 @section('contenido')
     <div class="md:flex md:justify-center md:gap-10 md:items-center">
         <div class="p-5 md:w-6/12">
-            <img src="{{ asset('img/registrar.jpg') }}" alt="Imagen registro de usuarios">
+            <img src="{{ asset('img/registro.png') }}" alt="Imagen registro de usuarios">
         </div>
         <div class="p-6 bg-white rounded-lg shadow-xl md:w-4/12">
             <form action="{{ route('register') }}" method="POST" novalidate>

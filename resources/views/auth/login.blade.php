@@ -7,7 +7,7 @@
 @section('contenido')
     <div class="md:flex md:justify-center md:gap-10 md:items-center">
         <div class="p-5 md:w-6/12">
-            <img src="{{ asset('img/login.jpg') }}" alt="Imagen login de usuarios">
+            <img src="{{ asset('img/login.png') }}" alt="Imagen login de usuarios">
         </div>
         <div class="p-6 bg-white rounded-lg shadow-xl md:w-4/12">
             <form method="POST" action="{{ route('login') }}" novalidate>
@@ -37,6 +37,11 @@
                 <input type="submit" value="Iniciar Sesión" class="w-full p-3 font-bold text-white uppercase transition-colors rounded-lg cursor-pointer bg-sky-600 hover:bg-sky-700">
 
             </form>
+            <div class="mb-5 text-right">
+                <a href="{{ route('password.request') }}" class="text-sm text-sky-600 hover:underline">
+                    ¿Olvidaste tu contraseña?
+                </a>
+            </div>
         </div>
     </div>
 

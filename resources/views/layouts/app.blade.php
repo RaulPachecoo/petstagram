@@ -9,6 +9,18 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     @livewireStyles
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            flex: 1;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -20,7 +32,14 @@
             </a>
 
             @auth
+                <livewire:buscar-usuarios />
+            @endauth
+            
+
+
+            @auth
                 <nav class="flex items-center gap-2">
+                    @if(auth()->user()->rol === 'user')
                     <a class="flex items-center gap-2 p-2 text-sm font-bold text-gray-600 uppercase bg-white border rounded cursor-pointer"
                         href="{{ route('posts.create') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -32,6 +51,7 @@
                         </svg>
                         Crear
                     </a>
+                    @endif
                     <a class="text-sm font-bold text-gray-600"
                         href="{{ route('posts.index', Auth::user()->username) }}">Hola: <span
                             class="font-normal">{{ auth()->user()->username }}</span></a>
@@ -58,7 +78,7 @@
     </main>
 
     <footer class="p-5 mt-10 font-bold text-center text-gray-500 uppercase">
-        Petstagram - Todos los derechos reservados
+        © Petstagram - Todos los derechos reservados - Raúl Pacheco Ropero
         {{ now()->year }}
     </footer>
 

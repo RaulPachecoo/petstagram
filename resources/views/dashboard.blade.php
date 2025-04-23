@@ -7,17 +7,16 @@
 @section('contenido')
 
     <div class="flex justify-center">
-        <div class="flex flex-col items-center w-full md:w-8/12 lg:w-6/12 md:flex-row">
-            <div class="w-8/12 px-5 lg:w-6/12">
-                <img class="object-cover w-48 h-48 rounded-full"
+        <div class="flex flex-col items-center justify-center w-full gap-4 md:w-8/12 lg:w-6/12 md:flex-row">
+            <div class="w-[260px] px-5 h-auto">
+                <img class="object-cover w-full h-full rounded-full"
                     src="{{ $user->imagen ? asset('perfiles') . '/' . $user->imagen : asset('img/usuario.svg') }}"
                     alt="Imagen Usuario">
-
             </div>
-            <div
-                class="flex flex-col items-center px-5 py-10 md:w-8/12 lg:w-6/12 md:justify-center md:items-start md:py-10">
+
+            <div class="flex flex-col items-center px-5 py-10 md:justify-center md:items-start md:py-10">
                 <div class="flex items-center gap-2">
-                    <p class="text-2xl text-gray-700">{{ $user->username }}</p>
+                    <p class="mb-5 text-2xl text-gray-700">{{ $user->username }}</p>
 
                     @auth
                         @if($user->id === Auth::user()->id)
@@ -30,37 +29,37 @@
                         @endif
                     @endauth
                 </div>
-                
+
                 @auth
-                    
+                    @if(auth()->user()->rol === 'user')
                         @livewire('follow-button', ['user' => $user])
-                    
+                    @endif
                 @endauth
             </div>
         </div>
     </div>
 
-    <section class="container px-6 mx-auto mt-10">
-        <h2 class="my-10 text-4xl font-black text-center">Publicaciones</h2>
-        @if($posts->count())
+    @if($user->rol === 'user')
+        <section class="container px-6 mx-auto mt-10">
+            <h2 class="my-10 text-4xl font-black text-center">Publicaciones</h2>
+            @if($posts->count())
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    @foreach ($posts as $post)
+                        <div>
+                            <a href="{{ route('posts.show', ['post' => $post, 'user' => $user]) }}">
+                                <img src="{{ asset('uploads') . '/' . $post->imagen }}" alt="Imagen del post {{ $post->titulo }}">
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
 
+                <div class="my-10">
+                    {{ $posts->links('pagination::tailwind') }}
+                </div>
 
-            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                @foreach ($posts as $post)
-                    <div>
-                        <a href="{{ route('posts.show', ['post' => $post, 'user' => $user]) }}">
-                            <img src="{{ asset('uploads') . '/' . $post->imagen }}" alt="Imagen del post {{ $post->titulo }}">
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="my-10">
-                {{ $posts->links('pagination::tailwind') }}
-            </div>
-
-        @else
-            <p class="text-sm font-bold text-center text-gray-600 uppercase">Todavia no hay publicaciones</p>
-        @endif
-    </section>
+            @else
+                <p class="text-sm font-bold text-center text-gray-600 uppercase">Todavía no hay publicaciones</p>
+            @endif
+        </section>
+    @endif
 @endsection

@@ -1,4 +1,4 @@
-<div>
+<div class="container px-6 mx-auto">
     @if($posts->count())
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             @foreach ($posts as $post)

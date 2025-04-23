@@ -26,6 +26,6 @@ class LoginController extends Controller
         }
 
         // Si la autenticación es exitosa, redirigir al usuario
-        return redirect()->route('posts.index', Auth::user()->username); 
+        return redirect()->route('home'); 
     }
 }
