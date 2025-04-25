@@ -27,19 +27,21 @@
     <header class="p-3 bg-white border-b shadow">
         <div class="container flex items-center justify-between mx-auto">
             <a href="{{ route('home') }}" class="flex items-center gap-3 text-3xl font-black">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo de Petstagram" style="width: 55px; height: auto;"> 
+                <img src="{{ asset('img/logo.png') }}" alt="Logo de Petstagram" style="width: 55px; height: auto;">
                 Petstagram
             </a>
 
             @auth
-                <livewire:buscar-usuarios />
+            <livewire:buscar-usuarios />
             @endauth
-            
-
 
             @auth
                 <nav class="flex items-center gap-2">
                     @if(auth()->user()->rol === 'user')
+                    {{-- Icono de Chat --}}
+                    <livewire:notificaciones-chat />
+
+                    {{-- Botón Crear --}}
                     <a class="flex items-center gap-2 p-2 text-sm font-bold text-gray-600 uppercase bg-white border rounded cursor-pointer"
                         href="{{ route('posts.create') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -52,22 +54,26 @@
                         Crear
                     </a>
                     @endif
-                    <a class="text-sm font-bold text-gray-600"
-                        href="{{ route('posts.index', Auth::user()->username) }}">Hola: <span
-                            class="font-normal">{{ auth()->user()->username }}</span></a>
+
+                    {{-- Usuario y logout --}}
+                    <a class="text-sm font-bold text-gray-600" href="{{ route('posts.index', Auth::user()->username) }}">
+                        Hola: <span class="font-normal">{{ auth()->user()->username }}</span>
+                    </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-sm font-bold text-gray-600 uppercase"
-                            href="{{ route('logout') }}">Cerrar Sesión</button>
+                        <button type="submit" class="text-sm font-bold text-gray-600 uppercase">
+                            Cerrar Sesión
+                        </button>
                     </form>
                 </nav>
+
             @endauth
 
             @guest
-                <nav class="flex items-center gap-2">
-                    <a class="text-sm font-bold text-gray-600 uppercase" href="{{ route('login') }}">Login</a>
-                    <a class="text-sm font-bold text-gray-600 uppercase" href="{{ route('register') }}">Crear Cuenta</a>
-                </nav>
+            <nav class="flex items-center gap-2">
+                <a class="text-sm font-bold text-gray-600 uppercase" href="{{ route('login') }}">Login</a>
+                <a class="text-sm font-bold text-gray-600 uppercase" href="{{ route('register') }}">Crear Cuenta</a>
+            </nav>
             @endguest
         </div>
     </header>
@@ -83,6 +89,7 @@
     </footer>
 
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>
