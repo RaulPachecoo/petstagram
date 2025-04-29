@@ -2,10 +2,11 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use App\Models\Message;
 use App\Models\User;
+use App\Models\Message;
+use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class Chat extends Component
 {
@@ -17,13 +18,11 @@ class Chat extends Component
         'messageBody' => 'required|string|max:1000',  // Validación de la longitud del mensaje
     ];
 
-    // Intervalo para polling (cada 3 segundos, ajusta según sea necesario)
-    protected $pollingInterval = 3;
-
+    // Actualizamos el método mount para cargar los mensajes según el receptor
     public function mount(User $receiver)
     {
         $this->receiver = $receiver;
-        $this->loadMessages();  // Cargar los mensajes cuando se monte el componente
+        $this->loadMessages();
     }
 
     // Función para enviar un mensaje
@@ -32,7 +31,6 @@ class Chat extends Component
         try {
             $this->validate();
 
-            // Guardar el mensaje
             Message::create([
                 'sender_id' => Auth::user()->id,
                 'receiver_id' => $this->receiver->id,
@@ -42,52 +40,91 @@ class Chat extends Component
             $this->messageBody = '';
             $this->loadMessages();
 
-            // Emitir el evento para desplazamiento del scroll
-            $this->emit('messageSent');  // Este es el evento que debe ser escuchado en el frontend
-
+            // Emitimos el evento en minúscula para que coincida con el JS
+            $this->dispatch('message-sent');
         } catch (\Exception $e) {
             session()->flash('error', 'Hubo un problema al enviar el mensaje.');
         }
     }
 
-
     // Función para cargar los mensajes del chat
     public function loadMessages()
     {
-        $this->chatMessages = Message::with('sender') // Asegura que podamos acceder a $message->sender->username
-            ->where(function ($query) {
-                $query->where('sender_id', Auth::id())
+        $userId = Auth::id();
+
+        // Marcar como leídos todos los mensajes que ha enviado el receptor al usuario autenticado
+        Message::where('sender_id', $this->receiver->id)
+            ->where('receiver_id', $userId)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
+        // Obtener todos los mensajes del chat
+        $this->chatMessages = Message::with('sender')
+            ->where(function ($query) use ($userId) {
+                $query->where('sender_id', $userId)
                     ->where('receiver_id', $this->receiver->id);
             })
-            ->orWhere(function ($query) {
+            ->orWhere(function ($query) use ($userId) {
                 $query->where('sender_id', $this->receiver->id)
-                    ->where('receiver_id', Auth::id());
+                    ->where('receiver_id', $userId);
             })
             ->orderBy('created_at', 'asc')
             ->get();
+    }
 
-        // Marcar como leídos
-        Message::where('receiver_id', Auth::id())
-            ->where('sender_id', $this->receiver->id)
-            ->where('is_read', false)
-            ->update(['is_read' => true]);
+
+    // Registra el listener para escuchar el evento 'changeReceiver'
+    protected $listeners = ['changeReceiver', 'mark-as-read-if-active'];
+    // Función para cambiar el receptor del chat dinámicamente
+    public function changeReceiver($username)
+    {
+        session()->flash('debug', "Cambiando receptor a: {$username}");
+
+        if (!$username) return;
+
+        $this->receiver = User::where('username', $username)->first();
+
+        if (!$this->receiver) {
+            session()->flash('debug', "Usuario no encontrado: {$username}");
+            return;
+        }
+
+        $this->loadMessages();
+
+        // Emitimos el evento en minúscula para que coincida con el JS
+        $this->dispatch('receiver-changed', id: $this->receiver->id);
     }
 
 
 
-    // Verificar si hay mensajes no leídos
-    public function hasUnreadMessages()
+    public function markAsReadIfActive()
     {
-        return Message::where('receiver_id', Auth::id())
+        if (!$this->receiver) return;
+
+        Message::where('sender_id', $this->receiver->id)
+            ->where('receiver_id', Auth::id())
             ->where('is_read', false)
-            ->exists();
+            ->update(['is_read' => true]);
     }
 
     // Renderizar la vista con los mensajes
     public function render()
     {
+        $user = Auth::user();
+
+        $followedUsers = $user->following;
+
+        // Mensajes no leídos agrupados por usuario
+        $unreadMessages = Message::where('receiver_id', $user->id)
+            ->where('is_read', false)
+            ->selectRaw('sender_id, COUNT(*) as count')
+            ->groupBy('sender_id')
+            ->pluck('count', 'sender_id');
+
         return view('livewire.chat', [
-            'chatMessages' => $this->chatMessages,
+            'chatMessages'   => $this->chatMessages,
+            'followedUsers'  => $followedUsers,
+            'unreadMessages' => $unreadMessages,
         ]);
     }
 }

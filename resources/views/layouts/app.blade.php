@@ -87,7 +87,6 @@
         © Petstagram - Todos los derechos reservados - Raúl Pacheco Ropero
         {{ now()->year }}
     </footer>
-
     @livewireScripts
     @stack('scripts')
 </body>
