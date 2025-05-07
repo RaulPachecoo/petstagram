@@ -8,6 +8,7 @@
     <title>Petstagram - @yield('titulo')</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @livewireStyles
     <style>
         body {

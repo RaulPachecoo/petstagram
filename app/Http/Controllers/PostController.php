@@ -16,6 +16,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use Illuminate\Http\JsonResponse;
 
 
 class PostController extends Controller
@@ -45,60 +46,58 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // Validar los datos
         $validatedData = $request->validate([
             'titulo' => 'required|max:255',
             'descripcion' => 'required',
-            'imagen' => 'required|string'
+            'imagen' => 'required|string',
         ]);
 
         $nombreImagen = $request->imagen;
         $imagePath = public_path('uploads/' . $nombreImagen);
 
-        // Verificamos si la imagen existe
         if (!file_exists($imagePath)) {
-            return back()->withErrors(['imagen' => 'La imagen no existe en el servidor']);
+            $error = ['imagen' => ['La imagen no existe en el servidor']];
+            return $request->expectsJson()
+                ? response()->json(['errors' => $error], 422)
+                : back()->withErrors($error)->withInput();
         }
 
         $ollama = new OllamaService();
-
-        // Prompts para Ollama
         $prompts = [
             "¿Esta imagen contiene contenido sensible o inapropiado? Responde solo 'sí' o 'no'.",
             "¿Esta imagen contiene algún animal o mascota? Responde solo 'sí' o 'no'."
         ];
 
-        // Enviar la imagen a Ollama para análisis
         $responses = $ollama->analyzeImage($imagePath, $prompts);
-
-        // Función de normalización
-        $normalize = fn($respuesta) => strtolower(preg_replace('/[^a-z]/i', '', Str::ascii($respuesta)));
+        $normalize = fn($r) => strtolower(preg_replace('/[^a-z]/i', '', Str::ascii($r)));
 
         $contenidoSensible = isset($responses[0]['response']) && $normalize($responses[0]['response']) === 'si';
         $contieneAnimal = isset($responses[1]['response']) && $normalize($responses[1]['response']) === 'si';
 
-        // Verificamos si la imagen tiene contenido sensible o un animal
-        if ($contenidoSensible) {
-            unlink($imagePath); // Eliminar la imagen si tiene contenido sensible
-            return back()->withErrors(['imagen' => 'La imagen contiene contenido sensible o inapropiado.']);
+        if ($contenidoSensible || !$contieneAnimal) {
+            unlink($imagePath);
+            $errorMsg = $contenidoSensible
+                ? 'La imagen contiene contenido sensible o inapropiado.'
+                : 'La imagen debe contener un animal o mascota.';
+            $error = ['imagen' => [$errorMsg]];
+            return $request->expectsJson()
+                ? response()->json(['errors' => $error], 422)
+                : back()->withErrors($error)->withInput();
         }
 
-        if (!$contieneAnimal) {
-            unlink($imagePath); // Eliminar la imagen si no contiene un animal
-            return back()->withErrors(['imagen' => 'La imagen debe contener un animal o mascota.']);
-        }
-
-        // Si la imagen pasa las validaciones, crear el post
         $request->user()->posts()->create([
-            'titulo' => $request->titulo,
-            'descripcion' => $request->descripcion, // Usamos la descripción proporcionada por el usuario
-            'imagen' => $nombreImagen,  // Solo almacenamos el nombre de la imagen
-            'user_id' => Auth::id()
+            'titulo' => $validatedData['titulo'],
+            'descripcion' => $validatedData['descripcion'],
+            'imagen' => $nombreImagen,
         ]);
 
-        // Redirigir con éxito
-        return redirect()->route('posts.index', $request->user()->username);
+        $redirectUrl = route('posts.index', $request->user()->username);
+
+        return $request->expectsJson()
+            ? response()->json(['redirect' => $redirectUrl])
+            : redirect($redirectUrl);
     }
+
 
     public function show(User $user, Post $post)
     {

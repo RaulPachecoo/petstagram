@@ -7,9 +7,9 @@ const dropzoneElement = document.querySelector('#dropzone');
 if (dropzoneElement) {
     const dropzone = new Dropzone(dropzoneElement, {
         dictDefaultMessage: 'Sube aquí tu imagen',
-        acceptedFiles: ".png, .jpg, .jpeg, .gif", 
+        acceptedFiles: ".png, .jpg, .jpeg, .gif",
         addRemoveLinks: true,
-        dictRemoveFile: 'Borrar Archivo', 
+        dictRemoveFile: 'Borrar Archivo',
         maxFiles: 1,
         uploadMultiple: false,
         init: function () {
@@ -34,3 +34,54 @@ if (dropzoneElement) {
         document.querySelector('[name="imagen"]').value = "";
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const postForm = document.getElementById('postForm');
+    const errorContainer = document.getElementById('error-container');
+    const errorMessages = document.getElementById('error-messages');
+
+    if (postForm) {
+        postForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(postForm);
+            const action = postForm.getAttribute('action');
+            errorMessages.innerHTML = '';
+            errorContainer.classList.add('hidden');
+
+            try {
+                const response = await fetch(action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json'
+                    },
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    if (data.errors) {
+                        for (const field in data.errors) {
+                            data.errors[field].forEach(error => {
+                                const p = document.createElement('p');
+                                p.textContent = error;
+                                errorMessages.appendChild(p);
+                            });
+                        }
+                        errorContainer.classList.remove('hidden');
+                    } else {
+                        console.error('Error inesperado:', data);
+                    }
+                } else if (data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            } catch (error) {
+                console.error('Error al enviar el formulario:', error);
+            }
+        });
+    }
+});
+
+
