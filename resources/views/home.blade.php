@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-<p class="hidden">
     Página Principal
-</p>
 @endsection
 
 @section('contenido')

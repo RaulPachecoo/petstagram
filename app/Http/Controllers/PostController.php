@@ -101,6 +101,15 @@ class PostController extends Controller
 
     public function show(User $user, Post $post)
     {
+        // Registrar la vista del post si el usuario es normal y no es el dueño
+        if (Auth::check() && Auth::user()->rol === 'user' && Auth::id() !== $post->user_id) {
+            $alreadyViewed = $post->views()->where('user_id', Auth::id())->exists();
+            if (!$alreadyViewed) {
+                $post->views()->create([
+                    'user_id' => Auth::id(),
+                ]);
+            }
+        }
         return view('posts.show', [
             'post' => $post,
             'user' => $user

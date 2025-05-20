@@ -126,9 +126,15 @@
 
     {{-- CONTENIDO PRINCIPAL --}}
     <main class="container mx-auto mt-6 mb-16 md:mb-10">
-        <h2 class="mb-10 text-3xl font-black text-center text-pet-marron">@yield('titulo')</h2>
+        @if(trim($__env->yieldContent('titulo')) !== 'Página Principal')
+        <h2 class="mb-10 text-3xl font-black text-center text-pet-marron">
+            @yield('titulo')
+        </h2>
+        @endif
+
         @yield('contenido')
     </main>
+
 
     {{-- PIE DE PÁGINA --}}
     <footer class="hidden p-5 mt-10 font-bold text-center uppercase text-pet-marron md:block">

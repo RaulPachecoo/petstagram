@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PostView;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -30,6 +31,11 @@ class Post extends Model
     
     public function likes(){
         return $this->hasMany(Like::class); 
+    }
+
+    public function views()
+    {
+        return $this->hasMany(PostView::class);
     }
 
     public function checkLike(User $user){

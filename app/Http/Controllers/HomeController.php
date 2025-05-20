@@ -26,8 +26,17 @@ class HomeController extends Controller
 
         // Si es un usuario normal
         $ids = $user->following->pluck('id')->toArray();
-        $posts = Post::whereIn('user_id', $ids)->latest()->paginate(20);
-        
+        // IDs de posts ya vistos
+        $viewedPostIds = $user->postViews->pluck('post_id')->toArray();
+        // Posts de seguidos que NO ha visto
+        $postsQuery = Post::whereIn('user_id', $ids)
+            ->whereNotIn('id', $viewedPostIds)
+            ->latest();
+        $posts = $postsQuery->paginate(20);
+        // Si ya los vio todos, mostrar los más recientes
+        if ($posts->isEmpty()) {
+            $posts = Post::whereIn('user_id', $ids)->latest()->paginate(20);
+        }
         return view('home', [
             'posts' => $posts
         ]);
