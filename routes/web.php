@@ -3,6 +3,7 @@
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
@@ -54,6 +55,13 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+// Blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/crear', [BlogController::class, 'create'])->name('blog.create');
+Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+
 
 // Ruta para redirigir al primer chat disponible (con un usuario con mensajes)
 Route::get('/chat', function () {

@@ -84,4 +84,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    function initLivewireHooks() {
+        if (typeof Livewire !== 'undefined') {
+            console.log('[Livewire] Detectado correctamente.');
+
+            scrollToBottom();
+
+            Livewire.hook('message.processed', () => {
+                setTimeout(scrollToBottom, 200);
+
+                // Nueva línea: Emitir evento Livewire para marcar como leídos si el chat está activo
+                Livewire.dispatch('mark-as-read-if-active');
+            });
+
+            window.addEventListener('message-sent', () => {
+                setTimeout(scrollToBottom, 300);
+            });
+
+            window.addEventListener('receiver-changed', () => {
+                setTimeout(scrollToBottom, 300);
+            });
+
+        } else {
+            setTimeout(initLivewireHooks, 100);
+        }
+    }
+
+    function scrollToBottom() {
+        const container = document.getElementById('chat-container');
+        if (container) {
+            container.scrollTo({
+                top: container.scrollHeight,
+                behavior: 'auto'
+            });
+            console.log('[Scroll] chat-container scrollHeight:', container.scrollHeight);
+        }
+    }
+
+    initLivewireHooks();
+});
+
+
 

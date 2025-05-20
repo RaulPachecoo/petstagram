@@ -1,3 +1,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+    header.mobile-header {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background-color: white;
+        border-bottom: 1px solid #ddd;
+        padding: 5px 0;
+    }
+
+    header.mobile-header .container {
+        justify-content: center;
+    }
+
+    header.mobile-header img {
+        width: 24px;
+        height: auto;
+    }
+
+    main {
+        padding-top: 90px;
+    }
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav .notificaciones-chat {
+    display: flex;
+    align-items: center;
+}
+
+/* public/css/app.css */
+.tear {
+    animation: tearFall 2s infinite;
+    transform-origin: center;
+}
+
+@keyframes tearFall {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(12px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+}
+
+.face {
+    animation: faceMove 3s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes faceMove {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(2px);
+    }
+}

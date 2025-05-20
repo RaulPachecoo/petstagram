@@ -19,7 +19,8 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(User::class)->select([
             'name', 
-            'username'
+            'username', 
+            'imagen'
         ]); 
     }
 
