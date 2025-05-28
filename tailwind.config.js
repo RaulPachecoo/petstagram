@@ -9,12 +9,12 @@ export default {
     extend: {
       colors: {
         pet: {
-          beige: '#FFF4E0',
+          beige: '#DDD0C8',
           crema: '#EFE3D6',
-          acento: '#6A0DAD',        // nuevo
-          acentoOscuro: '#3F0066',  // nuevo
-          marron: '#8D6E63',
-          fondoTarjeta: '#FFFDF8',
+          acento: '#6A0DAD',        
+          acentoOscuro: '#3F0066',  
+          marron: '#323232',
+          fondoTarjeta: '#F5F0E6', 
         },
       }
 

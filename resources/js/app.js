@@ -87,8 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', function () {
     function initLivewireHooks() {
         if (typeof Livewire !== 'undefined') {
-            console.log('[Livewire] Detectado correctamente.');
-
             scrollToBottom();
 
             Livewire.hook('message.processed', () => {
@@ -118,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 top: container.scrollHeight,
                 behavior: 'auto'
             });
-            console.log('[Scroll] chat-container scrollHeight:', container.scrollHeight);
         }
     }
 

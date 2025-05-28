@@ -14,10 +14,10 @@
 
 <body class="bg-pet-beige" x-data="{ buscarOpen: false }">
     {{-- ENCABEZADO DESKTOP --}}
-    <header class="hidden border-b shadow-md bg-pet-fondoTarjeta md:block">
+    <header class="hidden bg-pet-beige md:block">
         <div class="container flex items-center justify-between p-4 mx-auto">
             <a href="{{ route('home') }}" class="flex items-center gap-3 text-2xl font-extrabold text-pet-marron">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo de Petstagram" class="w-10 h-auto">
+                <img src="{{ asset('img/logo2.png') }}" alt="Logo de Petstagram" class="w-10 h-auto">
                 Petstagram
             </a>
 
@@ -90,7 +90,7 @@
     <header class="mobile-header md:hidden">
         <div class="container relative flex items-center justify-center p-2 mx-auto">
             <a href="{{ route('home') }}" class="flex items-center gap-2 text-xl font-extrabold text-pet-marron">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo de Petstagram" class="w-6 h-auto">
+                <img src="{{ asset('img/logo2.png') }}" alt="Logo de Petstagram" class="w-6 h-auto">
                 Petstagram
             </a>
 
@@ -178,3 +178,4 @@
 </body>
 
 </html>
+
