@@ -14,7 +14,7 @@ Editar Perfil: {{ Auth::user()->username }}
                 <label for="username" class="block mb-2 font-bold uppercase text-pet-marron">Username</label>
                 <input id="username" name="username" type="text" placeholder="Tu Nombre de Usuario"
                     class="w-full p-3 border rounded-lg bg-pet-crema text-pet-marron @error('username') border-red-500 @enderror"
-                    value="{{ Auth::user()->username }}">
+                    value="{{ old('username', Auth::user()->username) }}">
                 @error('username')
                 <p class="p-2 my-2 text-sm text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
                 @enderror
@@ -25,7 +25,7 @@ Editar Perfil: {{ Auth::user()->username }}
                 <label for="email" class="block mb-2 font-bold uppercase text-pet-marron">Email</label>
                 <input id="email" name="email" type="email" placeholder="Tu Email"
                     class="w-full p-3 border rounded-lg bg-pet-crema text-pet-marron @error('email') border-red-500 @enderror"
-                    value="{{ Auth::user()->email }}">
+                    value="{{ old('email', Auth::user()->email) }}">
                 @error('email')
                 <p class="p-2 my-2 text-sm text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
                 @enderror
@@ -43,10 +43,8 @@ Editar Perfil: {{ Auth::user()->username }}
 
             <!-- Confirmar Contraseña -->
             <div class="mb-5">
-                <label for="password_confirmation" class="block mb-2 font-bold uppercase text-pet-marron">Confirmar
-                    Contraseña</label>
-                <input id="password_confirmation" name="password_confirmation" type="password"
-                    placeholder="Confirmar Contraseña"
+                <label for="password_confirmation" class="block mb-2 font-bold uppercase text-pet-marron">Confirmar Contraseña</label>
+                <input id="password_confirmation" name="password_confirmation" type="password" placeholder="Confirmar Contraseña"
                     class="w-full p-3 border rounded-lg bg-pet-crema text-pet-marron @error('password_confirmation') border-red-500 @enderror">
                 @error('password_confirmation')
                 <p class="p-2 my-2 text-sm text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
@@ -62,6 +60,7 @@ Editar Perfil: {{ Auth::user()->username }}
             <input type="submit" value="Guardar Cambios"
                 class="w-full p-3 font-bold text-white uppercase transition-colors rounded-lg cursor-pointer bg-pet-acento hover:bg-pet-acentoOscuro">
         </form>
+
     </div>
 </div>
 @endsection

@@ -84,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+
 document.addEventListener('DOMContentLoaded', function () {
     function initLivewireHooks() {
         if (typeof Livewire !== 'undefined') {
