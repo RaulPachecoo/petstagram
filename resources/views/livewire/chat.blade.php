@@ -1,17 +1,20 @@
 <div class="flex flex-col max-w-6xl min-h-screen gap-6 mx-auto md:flex-row">
     <!-- Botón para abrir modal (solo en móviles) -->
     <div class="flex items-center justify-between px-4 mb-4 md:hidden">
-        <button onclick="toggleModal()" class="px-4 py-2 text-sm font-semibold text-white transition rounded-lg bg-pet-acento hover:bg-pet-acentoOscuro">
+        <button onclick="toggleModal()"
+            class="px-4 py-2 text-sm font-semibold text-white transition rounded-lg bg-pet-acento hover:bg-pet-acentoOscuro">
             Usuarios
         </button>
     </div>
 
     <!-- Modal de usuarios (solo para móviles) -->
-    <div id="userModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50 md:hidden">
+    <div id="userModal"
+        class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50 md:hidden">
         <div class="bg-pet-fondoTarjeta rounded-2xl w-[90%] max-h-[80vh] overflow-y-auto p-4 shadow-lg">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-bold text-pet-marron">Usuarios Seguidos</h3>
-                <button onclick="toggleModal()" class="text-xl transition text-pet-marron hover:text-pet-acento">&times;</button>
+                <button onclick="toggleModal()"
+                    class="text-xl transition text-pet-marron hover:text-pet-acento">&times;</button>
             </div>
 
             @if($followedUsers->isEmpty())
@@ -39,6 +42,7 @@
             @endif
         </div>
     </div>
+
 
     <!-- Lista de usuarios seguidos para escritorio -->
     <div class="hidden md:block md:w-1/4 p-4 bg-pet-fondoTarjeta shadow rounded-2xl h-[70vh] overflow-y-auto">
@@ -80,6 +84,7 @@
                 {{ $receiver->username }}
             </a>
         </h3>
+
 
         <!-- Mensajes -->
         <div id="chat-container"

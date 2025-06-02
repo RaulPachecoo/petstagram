@@ -45,4 +45,6 @@ class ChatController extends Controller
             'unreadMessages' => $unreadMessages, // Pasamos el conteo de mensajes no leídos
         ]);
     }
+
 }
+

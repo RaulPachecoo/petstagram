@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @stack('styles')
     <title>Petstagram - @yield('titulo')</title>
+    <link rel="icon" href="{{ asset('img/logo2.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/logo2.png') }}" type="image/x-icon">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,9 +42,9 @@
                     Blog
                 </a>
 
-                @if(auth()->user()->rol === 'user')
-                <livewire:notificaciones-chat />
 
+                <livewire:notificaciones-chat />
+                @if(auth()->user()->rol === 'user')
                 <a href="{{ route('posts.create') }}"
                     class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white transition rounded bg-pet-acento hover:bg-pet-acentoOscuro">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
@@ -178,4 +180,3 @@
 </body>
 
 </html>
-

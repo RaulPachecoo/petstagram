@@ -17,6 +17,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -26,6 +27,14 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
+// Google Auth
+Route::get('/auth/google', [LoginController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+// Google Auth para registro
+Route::get('/auth/google/register', [RegisterController::class, 'redirectToGoogle'])->name('google.register');
+Route::get('/auth/google/register/callback', [RegisterController::class, 'handleGoogleCallback'])->name('google.register.callback');
 
 // Perfil
 Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');

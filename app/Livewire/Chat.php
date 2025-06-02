@@ -111,11 +111,21 @@ class Chat extends Component
     public function render()
     {
         $user = Auth::user();
+        $admin = \App\Models\User::where('email', 'raulpachecoropero555@gmail.com')->first();
 
-        $followedUsers = $user->following;
+        if ($user->email === 'raulpachecoropero555@gmail.com') {
+            // Admin ve a todos menos a sí mismo
+            $followedUsers = \App\Models\User::where('id', '!=', $user->id)->get();
+        } else {
+            // Usuarios ven a quienes siguen + admin (si no lo siguen ya)
+            $followedUsers = $user->following;
+            if ($admin && !$followedUsers->contains('id', $admin->id) && $admin->id !== $user->id) {
+                $followedUsers = $followedUsers->concat([$admin]);
+            }
+        }
 
         // Mensajes no leídos agrupados por usuario
-        $unreadMessages = Message::where('receiver_id', $user->id)
+        $unreadMessages = \App\Models\Message::where('receiver_id', $user->id)
             ->where('is_read', false)
             ->selectRaw('sender_id, COUNT(*) as count')
             ->groupBy('sender_id')
