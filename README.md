@@ -1,7 +1,6 @@
-<div style="display: flex; align-items: center;">
-  <img src="https://files.catbox.moe/h3er2q.png" alt="Petstagram" width="30" height="30" style="margin-right: 10px;">
-  <h1 style="margin: 0;">Petstagram</h1>
-</div>
+<img src="https://files.catbox.moe/h3er2q.png" alt="Petstagram" width="50" height="50">
+<h1>Petstagram</h1>
+
 
 
 
