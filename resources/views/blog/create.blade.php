@@ -4,8 +4,6 @@
 
 @section('contenido')
     <div class="max-w-3xl mx-auto">
-        <h1 class="mb-6 text-3xl font-bold text-center text-pet-acento">Crear nueva entrada del blog</h1>
-
         @if ($errors->any())
             <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-xl">
                 <ul class="list-disc list-inside">
