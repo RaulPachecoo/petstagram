@@ -13,6 +13,9 @@ class LoginController extends Controller
 {
     public function index()
     {
+        if (\Illuminate\Support\Facades\Auth::check()) {
+            return redirect()->route('home');
+        }
         return view('auth.login');
     }
 
