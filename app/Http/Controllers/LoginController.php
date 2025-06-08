@@ -23,7 +23,11 @@ class LoginController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         if (Auth::check()) {
+=======
+        if (\Illuminate\Support\Facades\Auth::check()) {
+>>>>>>> f1c5fc55d4b7b5df39cf1ea77efe6ceb40de4402
             return redirect()->route('home');
         }
         return view('auth.login');
