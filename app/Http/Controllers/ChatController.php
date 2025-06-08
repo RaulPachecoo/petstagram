@@ -7,28 +7,38 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Controlador responsable de mostrar la interfaz de chat entre usuarios.
+ * Muestra el historial de mensajes, usuarios seguidos y mensajes no leídos.
+ */
 class ChatController extends Controller
 {
+    /**
+     * Muestra la vista de chat entre el usuario autenticado y otro usuario.
+     *
+     * @param \App\Models\User $user El usuario con el que se quiere chatear.
+     * @return \Illuminate\View\View Vista del chat con el historial de mensajes.
+     */
     public function index(User $user)
     {
-        $receiver = $user; // Usuario con el que el usuario actual quiere chatear
+        $receiver = $user; // Usuario receptor con el que se entabla el chat
 
-        // Recuperamos los mensajes entre el usuario actual y el receptor
+        // Recupera todos los mensajes entre el usuario actual y el receptor
         $chatMessages = Message::where(function ($query) use ($receiver) {
             $query->where('sender_id', Auth::user()->id)
-                ->where('receiver_id', $receiver->id);
+                  ->where('receiver_id', $receiver->id);
         })
-            ->orWhere(function ($query) use ($receiver) {
-                $query->where('sender_id', $receiver->id)
-                    ->where('receiver_id', Auth::user()->id);
-            })
-            ->orderBy('created_at', 'asc')
-            ->get();
+        ->orWhere(function ($query) use ($receiver) {
+            $query->where('sender_id', $receiver->id)
+                  ->where('receiver_id', Auth::user()->id);
+        })
+        ->orderBy('created_at', 'asc')
+        ->get();
 
-        // Obtener usuarios seguidos
+        // Obtiene todos los usuarios que el usuario actual sigue
         $followedUsers = Auth::user()->following;
 
-        // Verificar si hay mensajes no leídos de cada usuario
+        // Calcula cuántos mensajes no leídos hay de cada usuario seguido
         $unreadMessages = [];
         foreach ($followedUsers as $followedUser) {
             $unreadMessages[$followedUser->id] = Message::where('receiver_id', Auth::id())
@@ -37,14 +47,12 @@ class ChatController extends Controller
                 ->count();
         }
 
-        // Pasamos los datos a la vista
+        // Retorna la vista del chat con los datos necesarios
         return view('messages.chat', [
             'receiver' => $receiver,
             'chatMessages' => $chatMessages,
             'followedUsers' => $followedUsers,
-            'unreadMessages' => $unreadMessages, // Pasamos el conteo de mensajes no leídos
+            'unreadMessages' => $unreadMessages,
         ]);
     }
-
 }
-

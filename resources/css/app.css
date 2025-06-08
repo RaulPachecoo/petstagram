@@ -2,17 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 main {
     flex: 1;
     padding-top: 80px;
 }
+
+@media (min-width: 768px) and (max-width: 1280px) {
+  /* Apilamos verticalmente logo y nav */
+  header.md\:block > div.container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem; /* Espacio entre logo y buscador */
+  }
+
+  /* Hacemos que el nav ocupe todo el ancho y lo alineamos */
+  header.md\:block nav {
+    width: 100%;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+}
+
 
 @media (max-width: 768px) {
     header.mobile-header {
@@ -41,6 +63,7 @@ main {
     }
 }
 
+
 header .container {
     display: flex;
     justify-content: space-between;
@@ -57,6 +80,7 @@ header nav .notificaciones-chat {
     animation: tearFall 2s infinite;
     transform-origin: center;
 }
+
 
 @keyframes tearFall {
     0% {
@@ -86,3 +110,9 @@ header nav .notificaciones-chat {
         transform: translateY(2px);
     }
 }
+
+.petstagram-logo {
+    font-family: 'Poppins', Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
