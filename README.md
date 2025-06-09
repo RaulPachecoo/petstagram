@@ -18,57 +18,44 @@ Raúl Pacheco Ropero 						2º DAW
 
 # Índice
 
-[**3\.	Justificación del proyecto	4**](#justificacion-del-proyecto)
+**3. Justificación del proyecto**   
+&emsp;A. Características generales   
+&emsp;B. Restricciones generales   
+&emsp;C. Aspectos cubiertos y no cubiertos   
+&emsp;D. Comparativa con herramientas similares existentes   
 
-[A.	Características generales	4](#caracteristicas-generales)
+**4. Justificación de la Tecnología Empleada**   
 
-[B.	Restricciones generales	6](#restricciones-generales)
+**5. Requerimientos Hardware y Software**   
 
-[C.	Aspectos cubiertos y no cubiertos	6](#aspectos-cubiertos-y-no-cubiertos)
+**6. Análisis y Diseño**   
+&emsp;A. Diagrama de Casos de Uso   
+&emsp;B. Diagrama de Clases   
+&emsp;C. Diseño de la Base de Datos   
 
-[D.	Comparativa con herramientas similares existentes	8](#comparativa-con-herramientas-similares-existentes)
+**7. Implementación del Proyecto**   
 
-[**4\.	Justificación de la Tecnología Empleada	9**](#justificacion-de-la-tecnologia-empleada)
+**8. Evaluación y Pruebas**   
 
-[**5\.	Requerimientos Hardware y Software	10**](#requerimientos-hardware-y-software)
+**9. Manual de Estilos**  
+&emsp;A. Bocetos o sketches   
+&emsp;B. Criterios de accesibilidad   
+&emsp;C. Criterios de usabilidad   
+&emsp;D. Tipografía utilizada   
+&emsp;E. Mapa de colores del proyecto   
+&emsp;F. Dispositivos y vistas soportadas   
 
-[**6\.	Análisis y Diseño	12**](#analisis-y-diseno)
+**10. Software utilizado**   
 
-[A.	Diagrama de Casos de Uso	12](#diagrama-de-casos-de-uso)
+**11. Alojamiento Web**   
 
-[B.	Diagrama de Clases	13](#diagrama-de-clases)
+**12. Mejoras Posibles y Aportaciones Personales**   
 
-[C.	Diseño de la Base de Datos	14](#diseno-de-la-base-de-datos)
+**13. Bibliografía** 
 
-[**7\.	Implementación del Proyecto	15**](#implementacion-del-proyecto)
+# 3. Justificación del proyecto
 
-[**8\.	Evaluación y Pruebas	17**](#evaluacion-y-pruebas)
-
-[**9\.	Manual de Estilos	18**](#manual-de-estilos)
-
-[A. 	Bocetos o sketches	18](#a.-bocetos-o-sketches)
-
-[B. 	Criterios de accesibilidad	21](#b.-criterios-de-accesibilidad)
-
-[C. 	Criterios de usabilidad	23](#c.-criterios-de-usabilidad)
-
-[D.	Tipografía utilizada	24](#tipografia-utilizada)
-
-[E.	Mapa de colores del proyecto	25](#mapa-de-colores-del-proyecto)
-
-[F.	Dispositivos y vistas soportadas	26](#dispositivos-y-vistas-soportadas)
-
-[**10\.	Software utilizado	26**](#software-utilizado)
-
-[**11\.**	**Alojamiento Web	27**](#heading=h.4wicxn8breh6)
-
-[**12\.**	**Mejoras Posibles y Aportaciones Personales	28**](#heading=h.q7kzljm6m1af)
-
-[**13\.**	**Bibliografía	29**](#heading=h.t36j8o502e26)
-
-# 3. Justificación del proyecto {#justificacion-del-proyecto}
-
-##  A. **Características generales** {#caracteristicas-generales}
+##  A. **Características generales**
 
 Petstagram es una aplicación web que funciona como una red social enfocada exclusivamente en mascotas y animales. Su objetivo principal es ofrecer un entorno donde los usuarios puedan compartir contenido relacionado con sus mascotas, interactuar con otros amantes de los animales y acceder a información útil. A continuación, se describen las principales características de la plataforma:
 
@@ -105,7 +92,7 @@ El diseño de la plataforma sigue un enfoque moderno y claro, similar al de rede
 
 Estas características hacen de Petstagram una red social especializada, que no solo cubre una necesidad concreta en el mundo digital, sino que también promueve un uso responsable y seguro de la tecnología.
 
-##  B. **Restricciones generales** {#restricciones-generales}
+##  B. **Restricciones generales**
 
 Aunque Petstagram busca ofrecer una experiencia completa y fluida, existen algunas restricciones a tener en cuenta tanto desde el punto de vista técnico como funcional:
 
@@ -123,7 +110,7 @@ Al tratarse de una aplicación web, es necesario contar con una conexión a Inte
 
 Estas restricciones han sido consideradas durante el desarrollo para garantizar un equilibrio entre funcionalidad, seguridad y rendimiento del sistema.
 
-##  C. **Aspectos cubiertos y no cubiertos** {#aspectos-cubiertos-y-no-cubiertos}
+##  C. **Aspectos cubiertos y no cubiertos** 
 
 Durante el desarrollo de Petstagram se ha definido un conjunto de funcionalidades clave que forman parte del alcance principal del proyecto, así como otros aspectos que, por cuestiones de tiempo, complejidad técnica o enfoque del proyecto, no serán implementados.
 
@@ -171,7 +158,7 @@ No se desarrollará una app específica para Android o iOS, aunque la versión w
 
 La aplicación no cuenta con un sistema de notificaciones push ni avisos instantáneos sobre interacciones o mensajes.
 
-## D. **Comparativa con herramientas similares existentes** {#comparativa-con-herramientas-similares-existentes}
+## D. **Comparativa con herramientas similares existentes** 
 
 Petstagram se inspira en el funcionamiento de redes sociales ampliamente conocidas como Instagram o Facebook, pero se diferencia de ellas por estar completamente centrada en el mundo animal. A continuación, se expone una comparativa con algunas de estas herramientas:
 
@@ -212,7 +199,7 @@ Algunas de estas redes están limitadas a un tipo específico de mascota o tiene
 * Acceso a contenido útil sin necesidad de registro (blog).  
 * Interfaz moderna e intuitiva, adaptada a diferentes dispositivos.
 
-# 4. Justificación de la Tecnología Empleada {#justificacion-de-la-tecnologia-empleada}
+# 4. Justificación de la Tecnología Empleada 
 
 Para el desarrollo de Petstagram se han elegido herramientas modernas, potentes y ampliamente utilizadas en el entorno del desarrollo web, que permiten construir aplicaciones eficientes, escalables y con una experiencia de usuario fluida. A continuación, se detallan las tecnologías utilizadas y los motivos de su elección:
 
@@ -244,7 +231,7 @@ Aunque se ha tratado de minimizar el uso de JavaScript puro gracias a Livewire, 
 
 Para la moderación automática de las publicaciones, se ha integrado Ollama, una plataforma local de ejecución de modelos de inteligencia artificial. En este caso, se ha utilizado el modelo Minicpm-v, que permite analizar las imágenes subidas por los usuarios para verificar que efectivamente contienen animales y no incluyen contenido sensible o inapropiado.
 
-# 5. Requerimientos Hardware y Software {#requerimientos-hardware-y-software}
+# 5. Requerimientos Hardware y Software
 
 A continuación, se detallan los requisitos necesarios tanto del lado del cliente como del servidor para asegurar el correcto funcionamiento de Petstagram, incluyendo los recursos necesarios para la ejecución del sistema de inteligencia artificial utilizado en la moderación de contenido.
 
@@ -295,18 +282,18 @@ El servidor donde se ejecuta la aplicación web y el sistema de IA debe contar c
 * Entorno local: Docker  
 * Navegadores para pruebas: Chrome, Firefox
 
-# 6. Análisis y Diseño {#análisis-y-diseño}
+# 6. Análisis y Diseño 
 
-##  A. **Diagrama de Casos de Uso** {#diagrama-de-casos-de-uso}
+##  A. **Diagrama de Casos de Uso** 
 
 ![Descripción de la imagen](https://files.catbox.moe/eslwl9.png)
 
-##  B. **Diagrama de Clases** {#diagrama-de-clases}
+##  B. **Diagrama de Clases** 
 
    
 
 ![Descripción de la imagen](https://files.catbox.moe/guz4uk.png)
-##  C. **Diseño de la Base de Datos** {#diseno-de-la-base-de-datos}
+##  C. **Diseño de la Base de Datos** 
 
 La base de datos utilizada en *Petstagram* es de tipo **relacional**, implementada sobre MySQL. La estructura de la base de datos permite gestionar usuarios, publicaciones, comentarios, likes, seguidores, visualizaciones de publicaciones, mensajería privada y entradas de blog. Se han definido claves primarias y foráneas que aseguran la integridad referencial y evitan inconsistencias.
 
@@ -332,7 +319,7 @@ La base de datos utilizada en *Petstagram* es de tipo **relacional**, implementa
 ![Descripción de la imagen](https://files.catbox.moe/wro9wh.png)
 
 
-# 7. Implementación del Proyecto {#implementacion-del-proyecto}
+# 7. Implementación del Proyecto 
 
 En el desarrollo de la aplicación **Petstagram** he empleado diversos elementos para estructurar, estilizar, interactuar con el usuario y gestionar la comunicación con la base de datos. A continuación, se describen los principales recursos y herramientas utilizados:
 
@@ -382,7 +369,7 @@ En el desarrollo de la aplicación **Petstagram** he empleado diversos elementos
 
    # 
 
-# 8. Evaluación y Pruebas {#evaluacion-y-pruebas}
+# 8. Evaluación y Pruebas
 
 Para garantizar el correcto funcionamiento de **Petstagram**, se ha llevado a cabo un proceso de testeo que abarca tanto la aplicación web como la base de datos. El objetivo ha sido detectar y corregir errores, verificar que se cumplen los requisitos funcionales y asegurar una experiencia de usuario fluida y sin fallos críticos.
 
@@ -430,9 +417,9 @@ En conjunto, estas pruebas han permitido validar el correcto comportamiento de P
 
 # 
 
-# 9. Manual de Estilos {#manual-de-estilos}
+# 9. Manual de Estilos
 
-## **A. Bocetos o sketches** {#a.-bocetos-o-sketches}
+## **A. Bocetos o sketches**
 
 **Login Page**
 
@@ -462,7 +449,7 @@ En conjunto, estas pruebas han permitido validar el correcto comportamiento de P
 
 ![Descripción de la imagen](https://files.catbox.moe/vdcqbc.png)
 
-## B**. Criterios de accesibilidad** {#b.-criterios-de-accesibilidad}
+## **B. Criterios de accesibilidad**
 
 Con el objetivo de garantizar que **Petstagram** sea una aplicación inclusiva, se ha realizado un análisis basado en las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1, en su nivel de conformidad AA, que es el exigido legalmente en muchas jurisdicciones.
 
@@ -492,7 +479,7 @@ A continuación, se evalúa el cumplimiento de cada uno de los criterios de este
 | **3.3.4 Prevención de Errores Críticos** | Confirmación en acciones como eliminar publicaciones o enviar formularios sensibles. | NO |
 | **4.1.3 Mensajes de Estado** | Los mensajes de estado (éxito, error) deben ser accesibles para lectores de pantalla. | SÍ |
 
-## **C. Criterios de usabilidad** {#c.-criterios-de-usabilidad}
+## **C. Criterios de usabilidad** 
 
 Con el objetivo de comprobar que **Petstagram** ofrece una experiencia sencilla, intuitiva y agradable, se ha realizado una prueba de usabilidad con cinco usuarios reales que simulan perfiles distintos. A cada uno se le pidió completar tareas comunes dentro de la aplicación. Posteriormente, se recogió su retroalimentación.
 
@@ -529,7 +516,7 @@ Con el objetivo de comprobar que **Petstagram** ofrece una experiencia sencilla,
 * Aumentar el tamaño del texto en móviles.  
 * Valorar la inclusión de una guía de ayuda sencilla o una sección de preguntas frecuentes.
 
-##  **D. Tipografía utilizada** {#tipografia-utilizada}
+##  **D. Tipografía utilizada**
 
 En el diseño de Petstagram se ha optado por una combinación de tipografías modernas y legibles, que refuerzan tanto la estética amigable de la red social como la claridad en la lectura de los contenidos:
 
@@ -538,7 +525,7 @@ En el diseño de Petstagram se ha optado por una combinación de tipografías mo
 | **Poppins** | Nombre de la web / logotipo / títulos destacados | Sans serif geométrica, moderna y visualmente atractiva. Proporciona un toque juvenil y tecnológico. Ideal para destacar elementos clave. |
 | **Inter** | Texto del cuerpo, formularios, descripciones, menús y publicaciones | Sans serif optimizada para pantallas. Ofrece una lectura cómoda y limpia en distintos tamaños y dispositivos. Muy utilizada en interfaces web actuales. |
 
-## **E. Mapa de colores del proyecto** {#mapa-de-colores-del-proyecto}
+## **E. Mapa de colores del proyecto** 
 
 | Nombre del color | Hexadecimal | RGB | Aplicación en la web |
 | :---- | :---- | :---- | :---- |
@@ -549,7 +536,7 @@ En el diseño de Petstagram se ha optado por una combinación de tipografías mo
 | **Gris oscuro** | \#323232 | rgb(50, 50, 50\) | Texto principal, íconos, botones secundarios. Contraste perfecto con fondos claros. |
 | **Fondo tarjeta** | \#F5F0E6 | rgb(245, 240, 230\) | Fondo de tarjetas de publicaciones, comentarios y perfiles. Proporciona un diseño limpio y suave. |
 
-## **F. Dispositivos y vistas soportadas** {#dispositivos-y-vistas-soportadas}
+## **F. Dispositivos y vistas soportadas**
 
 El proyecto **Petstagram** ha sido diseñado siguiendo el principio de responsive design, lo que significa que se adapta a diferentes tamaños de pantalla y dispositivos, garantizando una experiencia de usuario óptima tanto en ordenadores como en dispositivos móviles o tabletas.
 
@@ -566,7 +553,7 @@ El proyecto **Petstagram** ha sido diseñado siguiendo el principio de responsiv
 * **Flexbox y Grid**: se han usado extensamente (a través de clases de Tailwind) para la distribución y alineación de elementos, asegurando que la interfaz se mantenga limpia y legible en todos los dispositivos.
 
 
-# 10. Software utilizado {#software-utilizado}
+# 10. Software utilizado
 
 A continuación se detalla el software utilizado para el desarrollo y despliegue de la aplicación **Petstagram**, indicando para qué se ha usado cada herramienta:
 
@@ -602,7 +589,7 @@ A continuación se detalla el software utilizado para el desarrollo y despliegue
 
 # 
 
-11. #  Alojamiento Web
+# 11. Alojamiento Web
 
 Para el alojamiento de la aplicación **Petstagram**, se ha utilizado un servicio de VPS (Servidor Privado Virtual) proporcionado por IONOS, junto con un dominio personalizado adquirido también en la misma plataforma.
 
@@ -633,7 +620,7 @@ IONOS es un proveedor reconocido de servicios de alojamiento web que ofrece VPS 
 
 # 
 
-12. # Mejoras Posibles y Aportaciones Personales 
+# 12. Mejoras Posibles y Aportaciones Personales 
 
 A lo largo del desarrollo de **Petstagram** se ha conseguido una aplicación funcional, moderna y con una buena experiencia de usuario. Sin embargo, siempre existen áreas en las que se podrían realizar mejoras. A continuación se describen algunas posibles mejoras y aportaciones futuras:
 
@@ -643,7 +630,7 @@ A lo largo del desarrollo de **Petstagram** se ha conseguido una aplicación fun
 * **Scroll infinito**: Optimizar el rendimiento de la visualización de publicaciones implementando carga progresiva de contenido.  
 * **Guía para nuevos usuarios**: Incluir un pequeño tutorial o introducción interactiva para explicar las principales funciones al registrarse por primera vez.
 
-13. # Bibliografía
+# 13. Bibliografía
 
 * **Curso de Laravel**   [https://www.udemy.com/course/curso-laravel-crea-aplicaciones-y-sitios-web-con-php-y-mvc/?couponCode=ACCAGE0923](https://www.udemy.com/course/curso-laravel-crea-aplicaciones-y-sitios-web-con-php-y-mvc/?couponCode=ACCAGE0923)   Curso en línea utilizado como base para el aprendizaje del framework Laravel y la estructura MVC en proyectos PHP.
 
